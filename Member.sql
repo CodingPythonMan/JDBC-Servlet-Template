@@ -33,8 +33,8 @@ create table join_member(
     birthday date not null,
     postNum varchar2(10) not null,
     address varchar2(100) not null,
-    kakaoMessage boolean not null,
-    mailing boolean not null,
-    smsReceiving boolean not null,
-    infoOpen boolean not null
+    kakaoMessage char(1) not null,
+    mailing char(1) not null,
+    smsReceiving char(1) not null,
+    infoOpen char(1) not null
 );

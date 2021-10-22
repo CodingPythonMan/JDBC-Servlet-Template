@@ -1,4 +1,4 @@
-package join;
+package sec04.ex03;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -40,35 +40,14 @@ public class MemberDAO {
 				String id = rs.getString("id");
 				String pwd = rs.getString("pwd");
 				String name = rs.getString("name");
-				String nickName = rs.getString("nickName");
 				String email = rs.getString("email");
-				String route = rs.getString("route");
-				String homePhone = rs.getString("homePhone");
-				String phone = rs.getString("phone");
-				Date birthday = rs.getDate("birthday");
-				String postNum = rs.getString("postNum");
-				String address = rs.getString("address");
-				char kakaoMessage = rs.getString("kakaoMessage").charAt(0);
-				char mailing = rs.getString("mailing").charAt(0);
-				char smsReceiving = rs.getString("smsReceiving").charAt(0);
-				char infoOpen = rs.getString("infoOpen").charAt(0);
-				
+				Date joinDate = rs.getDate("joinDate");
 				MemberVO vo = new MemberVO();
 				vo.setId(id);
 				vo.setPwd(pwd);
 				vo.setName(name);
-				vo.setNickName(nickName);
 				vo.setEmail(email);
-				vo.setRoute(route);
-				vo.setHomePhone(homePhone);
-				vo.setPhone(phone);
-				vo.setBirthday(birthday);
-				vo.setPostNum(postNum);
-				vo.setAddress(address);
-				vo.setKakaoMessage(kakaoMessage);
-				vo.setMailing(mailing);
-				vo.setSmsReceiving(smsReceiving);
-				vo.setInfoOpen(infoOpen);
+				vo.setJoinDate(joinDate);
 				list.add(vo);
 			}
 			rs.close();
@@ -86,41 +65,18 @@ public class MemberDAO {
 			String id = memberVO.getId();
 			String pwd = memberVO.getPwd();
 			String name = memberVO.getName();
-			String nickName = memberVO.getNickName();
 			String email = memberVO.getEmail();
-			String route = memberVO.getRoute();
-			String homePhone = memberVO.getHomePhone();
-			String phone = memberVO.getPhone();
-			Date birthday = memberVO.getBirthday();
-			String postNum = memberVO.getPostNum();
-			String address = memberVO.getAddress();
-			char kakaoMessage = memberVO.getKakaoMessage();
-			char mailing = memberVO.getMailing();
-			char smsReceiving = memberVO.getSmsReceiving();
-			char infoOpen = memberVO.getInfoOpen();
 			
-			String query = "insert into join_member";
-			query+= " (id,pwd,name,nickName,email,route,homePhone,phone,birthday,"
-					+ "postNum,address,kakaoMessage,mailing,smsReceiving,infoOpen)";
-			query+= " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "insert into t_member";
+			query+= " (id,pwd,name,email)";
+			query+= " values(?,?,?,?)";
 			
 			System.out.println("prepareStatement: " + query);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			pstmt.setString(3, name);
-			pstmt.setString(4, nickName);
-			pstmt.setString(5, email);
-			pstmt.setString(6, route);
-			pstmt.setString(7, homePhone);
-			pstmt.setString(8, phone);
-			pstmt.setDate(9, birthday);
-			pstmt.setString(10, postNum);
-			pstmt.setString(11, address);
-			pstmt.setString(12, Character.toString(kakaoMessage));
-			pstmt.setString(13, Character.toString(mailing));
-			pstmt.setString(14, Character.toString(smsReceiving));
-			pstmt.setString(15, Character.toString(infoOpen));
+			pstmt.setString(4, email);
 			pstmt.executeUpdate();
 			pstmt.close();
 		}catch(Exception e) {

@@ -14,10 +14,10 @@ public class MemberVO {
 	private Date birthday;
 	private String postNum;
 	private String address;
-	private boolean kakaoMessage;
-	private boolean mailing;
-	private boolean smsReceiving;
-	private boolean infoOpen;
+	private char kakaoMessage;
+	private char mailing;
+	private char smsReceiving;
+	private char infoOpen;
 	
 	public MemberVO() {
 		System.out.println("MemberVO 생성자 호출");
@@ -111,35 +111,36 @@ public class MemberVO {
 		this.address = address;
 	}
 
-	public boolean isKakaoMessage() {
+	public char getKakaoMessage() {
 		return kakaoMessage;
 	}
 
-	public void setKakaoMessage(boolean kakaoMessage) {
+	public void setKakaoMessage(char kakaoMessage) {
 		this.kakaoMessage = kakaoMessage;
 	}
 
-	public boolean isMailing() {
+	public char getMailing() {
 		return mailing;
 	}
 
-	public void setMailing(boolean mailing) {
+	public void setMailing(char mailing) {
 		this.mailing = mailing;
 	}
 
-	public boolean isSmsReceiving() {
+	public char getSmsReceiving() {
 		return smsReceiving;
 	}
 
-	public void setSmsReceiving(boolean smsReceiving) {
+	public void setSmsReceiving(char smsReceiving) {
 		this.smsReceiving = smsReceiving;
 	}
 
-	public boolean isInfoOpen() {
+	public char getInfoOpen() {
 		return infoOpen;
 	}
 
-	public void setInfoOpen(boolean infoOpen) {
+	public void setInfoOpen(char infoOpen) {
 		this.infoOpen = infoOpen;
 	}
+
 }
