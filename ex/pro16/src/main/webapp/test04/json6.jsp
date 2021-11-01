@@ -13,15 +13,23 @@
 <script>
 $(function(){
 	$("#checkJson").click(function(){
-		var _jsonInfo = '{"name":"박지성", "age":"25", "gender":"남자", "nickname":"날센돌이"}';
-		// 제이쿼리의 JSON 기능인 parse() 메소드를 이용해 JSON 자료형을 가져옵니다.
 		$.ajax({
 			type: "post",
 			async:false,
-			url:"${contextPath}/json",
-			//매개변수 이름 jsonInfo로 JSON 데이터를 ajax로 전송합니다.
-			data : {jsonInfo: _jsonInfo},
+			url:"${contextPath}/json2",
+
 			success:function(data, textStatus){
+				var jsonInfo = JSON.parse(data);
+				var memberInfo = "회원 정보<br>";
+				memberInfo += "=======<br>";
+				// 배열 이름 members로 각 배열 요소에 접근한 후 name으로 value를 출력합니다.
+				for(var i in jsonInfo.members){
+					memberInfo += "이름: " + jsonInfo.members[i].name + "<br>";
+					memberInfo += "나이: " + jsonInfo.members[i].age +"<br>";
+					memberInfo += "성별: " + jsonInfo.members[i].gender + "<br>";
+					memberInfo += "별명: " + jsonInfo.members[i].nickname +"<br><br><br>";
+				}
+				$("#output").html(memberInfo);
 			},
 			error: function(data, textStatus){
 				alert("에러가 발생했습니다.");
