@@ -50,10 +50,6 @@ public class BoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doHandle(request, response);
-	}
-	
-	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String nextPage ="";
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -66,35 +62,29 @@ public class BoardController extends HttpServlet {
 				// 전체글을 조회합니다.
 				articlesList = boardService.listArticles();
 				// 조회된 글 목록을 articlesList로 바인딩한 후 listArticles.jsp로 포워딩 합니다.
-				request.setAttribute("articleList", articlesList);
+				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board02/listArticles.jsp";
 			}else if(action.equals("/listArticles.do")) {
 				articlesList = boardService.listArticles();
 				// 조회된 글 목록을 articlesList로 바인딩한 후 listArticles로 포워딩합니다.
 				request.setAttribute("articlesList", articlesList);
 				nextPage ="/board02/listArticles.jsp";
-			}
-			// action 값 /articleForm.do로 요청 시 글쓰기창이 나타납니다.
-			else if(action.equals("/articleForm.do")) {
+			}else if(action.equals("/articleForm.do")) {
 				nextPage = "/board02/articleForm.jsp";
-				// /addArticle.do로 요청 시 새 글 추가 작업을 수행합니다.
 			}else if(action.equals("/addArticle.do")) {
 				int articleNO = 0;
 				
-				// 파일 업로드 기능을 사용하기 위해 upload()로 요청을 전달합니다.
 				Map<String, String> articleMap = upload(request, response);
-				// articleMap에 저장된 글 정보를 다시 가져옵니다.
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
 				
-				// 새 글의 부모글 번호를 0으로 설정합니다.
 				articleVO.setParentNO(0);
 				articleVO.setId("hong");
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
-				// 글쓰기창에서 입력된 정보를 ArticleVO객체에 설정한 후 addArticle로 전달합니다. 	
 				articleVO.setImageFileName(imageFileName);
+				
 				// 테이블에 새 글을 추가한 후 새 글에 대한 글 번호를 가져옵니다.
 				articleNO = boardService.addArticle(articleVO);
 				// 파일을 첨부한 경우에만 수행합니다.
@@ -111,12 +101,22 @@ public class BoardController extends HttpServlet {
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('새글을 추가했습니다.');"
 				+ " location.href='" + request.getContextPath() + "/board/listArticles.do';" + "</script>");
+				
+				return;
 			}
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 			dispatch.forward(request, response);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 	
 	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -148,7 +148,6 @@ public class BoardController extends HttpServlet {
 						if(idx == -1) {
 							idx = fileItem.getName().lastIndexOf("/");
 						}
-					
 						
 						String fileName = fileItem.getName().substring(idx + 1);
 						articleMap.put(fileItem.getFieldName(), fileName);
@@ -161,14 +160,6 @@ public class BoardController extends HttpServlet {
 			e.printStackTrace();
 		}
 		return articleMap;
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doHandle(request, response);
 	}
 
 }
