@@ -12,6 +12,7 @@ table{
 	margin: auto;
 	border: 1px solid #444444;
 	width: 80%;
+	border-collapse: collapse;
 }
 
 td{
@@ -22,7 +23,7 @@ tr{
 	text-align: center;
 }
 
-tr:nth-child(0){
+tr:nth-child(1){
 	height: 10;
 	background-color: lightgreen;
 }
@@ -31,17 +32,19 @@ p{
 	text-align: center;
 }
 
-span:nth-child(0){
+.span1{
 	font-size: 9pt;
 }
-span:nth-child(1){
-	padding-right: 30px;
+.span2{
+	padding-left: 30px;
 }
-span:nth-child(2){
+.span3{
 	padding-left: 20px;
 }
-span:nth-child(3){
+.span4{
 	font-size: 12px;
+}
+
 .main{
 	text-align: left;
 }

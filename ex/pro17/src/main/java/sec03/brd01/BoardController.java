@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardController
  */
-@WebServlet("/board/*")
+//@WebServlet("/board/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	BoardService boardService;
@@ -39,9 +39,9 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nextPage ="";
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		// 요청명을 가져옵니다.
 		String action = request.getPathInfo();
-		response.setContentType("text/html; charset=utf-8");
 		System.out.println("action: " + action);
 		try {
 			List<ArticleVO> articlesList = new ArrayList<ArticleVO>();

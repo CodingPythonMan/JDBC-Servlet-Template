@@ -64,5 +64,9 @@
 			</c:when>
 		</c:choose>
 	</table>
+	<!-- 글쓰기를 클릭하면 글쓰기 창인 articleForm.jsp가 나타납니다! -->
+	<a class ="cls1" href="${contextPath }/board/articleForm.do">
+		<p class="cls2">글쓰기</p>
+	</a>
 </body>
 </html>
