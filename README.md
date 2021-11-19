@@ -1,2 +1,4 @@
 # JDBC-Servlet-Template
-JDBC, Servlet, Template 정리입니다.
+JDBC, Servlet, Template Examples
+
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=HTML5&logoColor=white"/></a> &nbsp
